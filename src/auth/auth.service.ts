@@ -1,18 +1,19 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { usersignIndto } from './dto/signIn.dto';
 import * as argon2 from "argon2";
-import { PrismaClient } from '@prisma/client';
 import { registerdto } from './dto/register.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 // Our AuthService has the job of retrieving a user and verifying the password.
 //  We create a validateUser() method for this purpose. In the code below, 
 export class AuthService {
-    constructor(private jwtService:JwtService,private prisma:PrismaClient){}
+    constructor(private jwtService:JwtService,private prisma:PrismaService){}
 
     async validateUser(username:string,pass:string):Promise<any>{
-        const user = await this.prisma.user.findUnique(username)
+        const user = await this.prisma.user.findUnique({
+            where:{username:username}
+        })
         if(user && await argon2.verify(user.password,pass)){
             const{password,...result} = user
         return result
@@ -33,7 +34,7 @@ async signup(userData:usersignIndto){
     return newUser
 }
 async login(register:registerdto){
-    let user = this.prisma.user.findUnique(register.username)
+    let user =await this.prisma.user.findUnique({where:{username:register.username}})
     if(!user){
         throw new Error("Invalid credentials")
     }
