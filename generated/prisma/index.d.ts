@@ -887,6 +887,7 @@ export namespace Prisma {
     password: string | null
     email: string | null
     profilePic: string | null
+    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -895,6 +896,7 @@ export namespace Prisma {
     password: string | null
     email: string | null
     profilePic: string | null
+    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -903,6 +905,7 @@ export namespace Prisma {
     password: number
     email: number
     profilePic: number
+    role: number
     _all: number
   }
 
@@ -921,6 +924,7 @@ export namespace Prisma {
     password?: true
     email?: true
     profilePic?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -929,6 +933,7 @@ export namespace Prisma {
     password?: true
     email?: true
     profilePic?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -937,6 +942,7 @@ export namespace Prisma {
     password?: true
     email?: true
     profilePic?: true
+    role?: true
     _all?: true
   }
 
@@ -1032,6 +1038,7 @@ export namespace Prisma {
     password: string
     email: string
     profilePic: string | null
+    role: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1059,6 +1066,7 @@ export namespace Prisma {
     password?: boolean
     email?: boolean
     profilePic?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
 
@@ -1069,9 +1077,10 @@ export namespace Prisma {
     password?: boolean
     email?: boolean
     profilePic?: boolean
+    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "email" | "profilePic", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "email" | "profilePic" | "role", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1082,6 +1091,7 @@ export namespace Prisma {
       password: string
       email: string
       profilePic: string | null
+      role: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1456,6 +1466,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly profilePic: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'String'>
   }
     
 
@@ -1796,7 +1807,8 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     email: 'email',
-    profilePic: 'profilePic'
+    profilePic: 'profilePic',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1822,7 +1834,8 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     email: 'email',
-    profilePic: 'profilePic'
+    profilePic: 'profilePic',
+    role: 'role'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -1866,6 +1879,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     profilePic?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
   }
 
   export type UserOrderByWithRelationInput = {
@@ -1874,6 +1888,7 @@ export namespace Prisma {
     password?: SortOrder
     email?: SortOrder
     profilePic?: SortOrderInput | SortOrder
+    role?: SortOrder
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -1886,6 +1901,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     profilePic?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -1894,6 +1910,7 @@ export namespace Prisma {
     password?: SortOrder
     email?: SortOrder
     profilePic?: SortOrderInput | SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -1910,6 +1927,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     profilePic?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type UserCreateInput = {
@@ -1917,6 +1935,7 @@ export namespace Prisma {
     password: string
     email: string
     profilePic?: string | null
+    role?: string
   }
 
   export type UserUncheckedCreateInput = {
@@ -1925,6 +1944,7 @@ export namespace Prisma {
     password: string
     email: string
     profilePic?: string | null
+    role?: string
   }
 
   export type UserUpdateInput = {
@@ -1932,6 +1952,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateInput = {
@@ -1940,6 +1961,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateManyInput = {
@@ -1948,6 +1970,7 @@ export namespace Prisma {
     password: string
     email: string
     profilePic?: string | null
+    role?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -1955,6 +1978,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -1963,6 +1987,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2023,6 +2048,7 @@ export namespace Prisma {
     password?: SortOrder
     email?: SortOrder
     profilePic?: SortOrder
+    role?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -2035,6 +2061,7 @@ export namespace Prisma {
     password?: SortOrder
     email?: SortOrder
     profilePic?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -2043,6 +2070,7 @@ export namespace Prisma {
     password?: SortOrder
     email?: SortOrder
     profilePic?: SortOrder
+    role?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {

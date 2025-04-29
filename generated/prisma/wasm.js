@@ -122,7 +122,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   email: 'email',
-  profilePic: 'profilePic'
+  profilePic: 'profilePic',
+  role: 'role'
 };
 
 exports.Prisma.SortOrder = {
@@ -139,7 +140,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   username: 'username',
   password: 'password',
   email: 'email',
-  profilePic: 'profilePic'
+  profilePic: 'profilePic',
+  role: 'role'
 };
 
 

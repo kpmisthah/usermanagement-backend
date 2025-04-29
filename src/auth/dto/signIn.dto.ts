@@ -11,4 +11,6 @@ export class usersignIndto{
 
     @IsEmail()
     email:string
+
+    role:string
 }

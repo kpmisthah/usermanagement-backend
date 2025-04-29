@@ -7,7 +7,7 @@ import { profile } from 'console';
 export class UserService {
   constructor(private prisma:PrismaService){}
   async updateProfile(id:number,updateProfileDto:UpdateProfileDto){
-    return this.prisma.user.update({
+    return await this.prisma.user.update({
       where:{id},
       data:{
         ...updateProfileDto,

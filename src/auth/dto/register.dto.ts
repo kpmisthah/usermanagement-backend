@@ -7,4 +7,5 @@ export class registerdto{
     @IsNotEmpty()
     @MinLength(6)
     password:string
+    
 }
