@@ -7,9 +7,10 @@ import { AdminModule } from './admin/admin.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { HomeModule } from './home/home.module';
 
 @Module({
-  imports: [AuthModule, UserModule,  AdminModule, PrismaModule,ConfigModule.forRoot({isGlobal:true}), FileUploadModule],
+  imports: [AuthModule, UserModule,  AdminModule, PrismaModule,ConfigModule.forRoot({isGlobal:true}), FileUploadModule, HomeModule],
   controllers: [AppController],
   providers: [AppService],
 })
