@@ -11,7 +11,9 @@ export class AdminController {
     @UseGuards(JwtGuard,AdminGuard)
     @Get('/get-users')
     async getUsers(@Query('search') search:string){
-        return this.adminService.viewUsers()
+        console.log('get search query:',search);
+        
+        return this.adminService.viewUsers(search)
     }
     @Post('/create-user')
     async createUsers(@Body() createUser:CreateuserDto){
