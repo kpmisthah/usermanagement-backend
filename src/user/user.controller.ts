@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Put, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Put, Req, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserService } from './user.service';
 import { FileUploadService } from 'src/file-upload/file-upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -14,25 +14,23 @@ export class UserController {
     @UseGuards(JwtGuard)
   async getProfile(@Req() req) {
     console.log('getProfile req.user:', req.user);
-    const userId = req.user?.userId ?? req.user?.sub; // Temporary fallback
-    console.log('getProfile userId:', userId);
+    const userId = req.user?.userId ?? req.user?.sub; 
     if (!userId || isNaN(Number(userId))) {
       throw new HttpException('Invalid or missing user ID', HttpStatus.UNAUTHORIZED);
     }
     return this.userService.getProfile(Number(userId));
   }
 
+ 
+  @Put('/update')
   @UseGuards(JwtGuard)
-  @Put('update')
   @UseInterceptors(FileInterceptor('file'))
   async updateUserProfile(
-    @Req() req,
+    @Req() req, @Res({passthrough:true}) res:Response,
     @Body() updateProfileDto: UpdateProfileDto,
     @UploadedFile() file: Express.Multer.File
   ) {
-    console.log('updateUserProfile req.user:', req.user);
     const userId = req.user?.userId ?? req.user?.sub; 
-    console.log('updateUserProfile userId:', userId);
     if (!userId || isNaN(Number(userId))) {
       throw new HttpException('Invalid or missing user ID', HttpStatus.UNAUTHORIZED);
     }
