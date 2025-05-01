@@ -15,9 +15,9 @@ datasource db {
 }
 model User{
   id Int @id @default(autoincrement())
-  username String @unique
+  username String 
   password String
-  email String @unique
+  email String 
   profilePic String? @db.LongText
   role String @default("user")
 }

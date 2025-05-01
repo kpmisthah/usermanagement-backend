@@ -17,4 +17,8 @@ export class UpdateUserDto {
     @IsOptional()
     profilePic?:string
 
+    @IsString()
+    @IsOptional()
+    role:string
+
 }
