@@ -1,9 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { usersignIndto } from './dto/signIn.dto';
 import * as argon2 from "argon2";
 import { registerdto } from './dto/register.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Response } from 'express';
 @Injectable()
 // Our AuthService has the job of retrieving a user and verifying the password.
 //  We create a validateUser() method for this purpose. In the code below, 
@@ -23,7 +24,10 @@ export class AuthService {
 
 async signup(userData:usersignIndto){
     let hash = await argon2.hash(userData.password)
-    
+    let existingUser = await this.prisma.user.findUnique({where:{email:userData.email}})
+    if(existingUser){
+        throw new BadRequestException("User already Exists")
+    }
     let newUser = await this.prisma.user.create({
         data:{
             username:userData.username,
@@ -33,7 +37,7 @@ async signup(userData:usersignIndto){
     })
     return newUser
 }
-async login(register:registerdto){
+async login(register:registerdto,res:Response){
     let user =await this.prisma.user.findUnique({where:{username:register.username}})
     if(!user){
         throw new Error("Invalid credentials")
@@ -43,8 +47,13 @@ async login(register:registerdto){
         throw new HttpException('invalid credentials',HttpStatus.UNAUTHORIZED)
     }
     const payload = {username:user.username,sub:user.id,role:user.role}
-    return{
-        access_token:this.jwtService.sign(payload)
-    }
+   const access_token = this.jwtService.sign(payload)
+   res.cookie('auth_token',access_token,{
+    httpOnly:true,
+    maxAge:3600*1000
+   })
+   console.log("login success");
+   delete (user as any).password;
+   return {user}
 }
 }

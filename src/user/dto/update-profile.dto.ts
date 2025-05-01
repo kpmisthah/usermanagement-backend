@@ -11,7 +11,7 @@ export class UpdateProfileDto {
 
     @IsString()
     @IsOptional()
-    password:string
+    password?:string
 
     @IsString()
     @IsOptional()

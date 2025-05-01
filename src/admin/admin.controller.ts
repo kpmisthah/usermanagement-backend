@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Search, UseGuards } from '@nestjs/common';
 import { AdminGuard } from 'src/guard/admin.guard';
 import { AdminService } from './admin.service';
 import { JwtGuard } from 'src/guard/jwt.guard';
@@ -10,7 +10,7 @@ export class AdminController {
     constructor(private adminService:AdminService){}
     @UseGuards(JwtGuard,AdminGuard)
     @Get('/get-users')
-    async getUsers(){
+    async getUsers(@Query('search') search:string){
         return this.adminService.viewUsers()
     }
     @Post('/create-user')

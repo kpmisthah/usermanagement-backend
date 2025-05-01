@@ -19,6 +19,6 @@ model User {
   username   String  @unique
   password   String
   email      String  @unique
-  profilePic String?
+  profilePic String? @db.LongText
   role       String  @default("user")
 }
